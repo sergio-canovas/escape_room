@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>Escape Room</title>
+    <link rel="stylesheet" type="text/css" href="/lib/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/lib/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Girassol&display=swap" rel="stylesheet">
+    <script src="/lib/jquery-3.5.0.min.js"></script>
+    <script src="/lib/jquery-ui.js"></script>
+    <script src="/lib/all.min.js"></script>
+    <script src="/lib/gm.js"></script>
+</head>
+<body>
+
+<!-- Media -->
+    
+    <!-- Audios -->
+<audio id="a_gramofono" src="/audios/a_gramofono.mp3"></audio>
+<audio id="a_cello" src="/audios/a_cello.mp3"></audio>
+<audio id="a_clok" src="audios/clok.wav"></audio>
+<audio id="a_be" src="audios/if-beethoven.mp3"></audio>   
+    
+    <!-- Fotos -->
+    <div style="display:none">
+       <img src='images/bkg/3.png'>
+       <img src='images/bkg/4.png'>
+       <img src='images/bkg/5.png'>
+       <img src='images/bkg/6.png'>
+       <img src='images/bkg/6_2.png'> 
+       <img src='images/bkg/8.png'>
+       <img src='images/bkg/9.png'>
+       <img src='images/bkg/10.png'>
+       <img src='images/bkg/11.png'>
+       <img src='images/bkg/12.png'>
+       <img src='images/bkg/13.png'>
+       <img src='images/bkg/14.png'>
+       <img src='images/bkg/15.png'>
+    </div>
+    
+    
+<!-- Grid -->
+
+<div class="big">
+     <div class="grid-container">
+     
+<!-- Header -->
+      <div class="item1"><span>Music Escape Room</span></div>  
+        
+<!-- Menú -->
+      <div class="item2">
+        <div onclick="om_tohome()"><i class="fas fa-home fa-2x"></i><p>INICIO</p></div>
+        <div onclick="om_mision()"> <i  class=" fas fa-clipboard-list fa-2x"></i><p>MISIÓN</p>
+        </div>
+      </div>
+<!-- Central -->
+      <div id="game" class="item3">
+           <img src="images/bkg/2.png" >
+            <div id="candado" onclick="om_candado()">
+                <img src="/images/items/candado.png" alt="" width="35px" height="50px">
+            </div>
+            <div id='cuadro1' onclick='notificator("Curiosamente en este siglo nació Beethoven")' style=' bottom:120px;right:-280px;width:190px; height:30px; background-color:none; cursor: pointer'></div>
+            <div style="bottom:350px;right:13px;" class="slide-top clickable " onclick="arrow0()">
+                <i class="fas fa-chevron-up fa-1x"></i>
+            </div>
+      </div>
+<!-- Clues -->  
+      <div class="item4"><span>PISTAS</span>
+      <!-- Key -->
+      <div id="key_a" class="clues"><img src='images/items/key_a.png' width="36px" height="64px"></div>
+      <!-- Mapa -->
+      <div id="map_a" class="clues"><img src='images/items/map_small.png' width="64px" height="45px" onclick="om_standard(d_mapa)"></div>
+      <!-- Partituras -->
+       <div id="partitura" class="clues"><img src='images/items/c_partitura.png' onclick="om_standard(d_partitura)">
+      </div>
+       <div id="partitura2" class="clues"><img src='images/items/c_partitura.png' onclick="om_standard(d_partitura2)">
+      </div>
+       <div id="partitura3" class="clues"><img src='images/items/c_partitura.png' onclick="om_d_partitura3()">
+      </div>
+        <div id="partitura_final" class="clues"><img src='images/items/vintage_letter.jpg' onclick="om_standard(d_final_list)">
+          </div>
+      
+      </div>
+<!-- Footer -->
+     <div id="a_notification" class="item5">
+          <div class="slide-top2"><span id="notification">Presiona continuar para empezar</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Diálogos -->
+
+<!-- toHome -->
+
+<div id="d_tohome" title="ATENCIÓN!">
+   <i class="fas fa-exclamation-triangle fa-1x"></i>
+    <p>Esto hará que pierdas todos los progresos que has hecho. Si estás seguro pulsa aceptar, de lo contrario pulsa la tecla Escape o haz click en el botón Cancelar</p>
+</div>
+
+<!-- Mision -->
+
+<div id="d_mision" title="MISIÓN">
+    <p>Bienvenid@, has sido seleccionado entre l@s mejores investigadores para encontrar la partitura perdida del famoso compositor Ludwig van Beethoven. Nos consta que el pianista Rudolf Buchbinder ha escondido la partitura en esta mansión familiar abandonada para asegurarse de que caiga en manos de un auténtico admirador de la vida y obra del compositor. </p>
+    
+</div>
+
+<!-- Candado -->
+
+<div id="d_candado">
+    <p>Introduce la clave</p>
+    <input type="text" id="p_candado" maxlength="2">
+    <p>_ _</p>
+</div>
+
+<!-- Mapa -->
+
+<div style="display: none" id="d_mapa">
+    <img src="images/items/map.jpg">
+</div>
+
+<!-- Piano -->
+<div class="prueba" id="d_piano">
+    <img src="images/items/piano.png">
+    <p>Parece que faltan algunas notas</p>
+    <input type="text" id="p_piano" maxlength="3">
+    <p>_ _ _</p>
+</div>
+
+<!-- Retratos -->
+
+<div style="display: none" id="d_retrato1">
+    <img src="images/items/mom_beet.png">
+    <p>Maria Magdalena Keverich (1746-1787)</p>
+    
+</div>
+
+<div style="display: none" id="d_retrato2">
+    <img src="images/items/dad_beet.png">
+    <p>Johann van Beethoven (1740-1792) </p>
+</div>
+
+<!-- Partitura1 -->
+
+<div style="display: none" id="d_partitura">
+    <img src="images/items/nota1.png">
+</div>
+
+<!-- Partitura2 -->
+
+<div style="display: none" id="d_partitura2">
+    <img src="images/items/nota2.png">
+</div>
+
+<!-- Partitura31 -->
+
+<div style="display: none" id="d_partitura31">
+    <img src="images/items/nota3.png">
+</div>
+
+<!-- Partitura3 -->
+
+<div style="display: none" id="d_partitura3">
+   <p>¡Qué extraño! Parece que no hay nada escrito...</p>
+    <img src="/images/items/nota3_blank.png">
+</div>
+
+
+<!-- Lista final -->
+<div style="display: none" id="d_final_list">
+   <p>Rudolf ha dejado una lista de sus obras preferidas compuestas por Beethoven</p>
+    <img src="images/items/final_list.png">
+</div>
+
+
+<!-- Gramola -->
+
+<div id="d_gramola">
+    <img src="images/items/tocadiscos.gif">
+</div>
+
+<!-- Cuadro -->
+
+<div id="d_cuadro">
+    <video id="video1" src="videos/video_1.mp4"></video>
+</div>
+
+<!-- Máquina de escribir -->
+<div class="prueba" id="d_tpmachine">
+    <p>Hay una hoja en la máquina de escribir con este mensaje escrito:</p>
+    <div><p>Ludwig van Beethoven fue un compositor, director y pianista alemán nacido en _ _ _ _; su música es una de las más interpretadas del repertorio clásico, y es uno de los compositores más admirados en la historia de la música.</p></div>
+    
+    <img src="images/items/tw_machine.png">
+    <p>Parece que hay que escribir el nombre de una ciudad:</p>
+    <input type="text" id="p_tpmachine" maxlength="4">
+    <p class="carta">_ _ _ _</p>
+</div>
+
+<!-- Librería -->
+
+<div id="d_libreria">
+    <img src="images/items/classic_novels.png">
+    <div onclick='final_function("1")' style=' position: absolute;bottom:24px;right:280px;width:55px; height:220px; background-color:none; cursor: pointer'> </div>
+    <div onclick='final_function("2")' style=' position: absolute;bottom:265px;right:160px;width:50px; height:230px; background-color:none; cursor: pointer'> </div>
+    <div onclick='final_function("3")' style=' position: absolute;bottom:270px;right:370px;width:40px; height:200px; background-color:none; cursor: pointer'> </div>
+    <div onclick='final_function("4")' style=' position: absolute;bottom:22px;left:420px;width:30px; height:200px; background-color:none; cursor: pointer'> </div>
+    <div  onclick='final_function("5")' style=' position: absolute;bottom:265px;left:422px;width:55px; height:220px; background-color:none; cursor: pointer'> </div>
+    <div  onclick='final_function("6")' style=' position: absolute;bottom:22px;left:65px;width:40px; height:230px; background-color:none; cursor: pointer'> </div>
+    <div  onclick='final_function("7")' style=' position: absolute;bottom:270px;left:175px;width:30px; height:180px; background-color:none; cursor: pointer'> </div>
+    
+    <!-- Final Game -->
+
+<div id="d_end_game">
+    <p>¡Felicidades! Has encontrado la partitura secreta de Beethoven.</p><p>Gracias a ti, el mundo podrá deleitarse con otra obra de este gran compositor.</p>
+    <img style="margin: 0 auto;" src="images/portrait_b_el.png" alt="">
+
+</div>
+    
+</div>
+
+</body>
+</html>
